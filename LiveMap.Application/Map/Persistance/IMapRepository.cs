@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiveMap.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ public interface IMapRepository
     public Task<Domain.Models.Map?> GetSingle(Guid id);
 
     public Task<ICollection<Domain.Models.Map>> GetMultiple(int? skip, int? take);
+
+    public Task<bool> UpdateMapBorder(Guid id, Coordinate[] coords);
 }
 

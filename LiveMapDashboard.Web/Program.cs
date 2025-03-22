@@ -27,7 +27,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
+
 app.MapStaticAssets();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}")
+    .WithStaticAssets();
 
 // Does not have to be awaited as far as we are concerned. It can just run seperately as a job.
 await app.SeedDatabase();

@@ -57,7 +57,43 @@ public class MapRepository : IMapRepository
             return null;
         }
 
-
         return map.ToMap();
+    }
+
+    public async Task<bool> UpdateMapBorder(Guid id, Coordinate[] coords)
+    {
+        SqlMap? map = await _context.Maps.FindAsync(id);
+        
+        if(map is null)
+        {
+            return false;
+        }
+        map.Border = coords.ToPolygon();
+
+        /*
+         * An example of what could go wrong. In an ideal scenario you would pass back a Result<T> object. A result could be a success or a failure, containing detailed information.
+         * We would return a Success<T>(T Value) or a Failure<TParams, TMessage>(TParams Parameters, TMessage Message)
+         * 
+         * Currently we handle this with straight up exceptions, but if we want to pass a more detailed result back, the above should be considered.
+        */
+        try
+        {
+            _context.Maps.Update(map);
+            _context.SaveChanges();
+        }
+        catch (DbUpdateConcurrencyException ex)
+        {
+            return false;
+        }
+        catch (DbUpdateException ex)
+        {
+            return false;
+        }
+        catch (Exception ex)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

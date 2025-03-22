@@ -1,6 +1,8 @@
 ﻿using LiveMap.Application;
 using PointOfInterest = LiveMap.Application.PointOfInterest;
 using Map = LiveMap.Application.Map;
+using LiveMap.Application.Map.Requests;
+using LiveMap.Application.Map.Responses;
 
 namespace LiveMapDashboard.Web.Extensions;
 public static class RequestHandlerDI
@@ -26,6 +28,11 @@ public static class RequestHandlerDI
             Map.Requests.GetMultipleRequest,
             Map.Responses.GetMultipleResponse>,
             Map.Handlers.GetMultipleHandler>();
+
+        services.AddTransient<IRequestHandler<
+            Map.Requests.UpdateBorderRequest,
+            Map.Responses.UpdateBorderResponse>,
+            Map.Handlers.UpdateBorderHandler>();
 
         return services;
     }

@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LiveMapDashboard.Web.styles.css" asp-append-version="true" />
+
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@5.2.0/dist/maplibre-gl.css' />
+    <script src='https://unpkg.com/maplibre-gl@5.2.0/dist/maplibre-gl.js'></script>
 </head>
 <body>
     <header>
@@ -26,6 +29,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Park">Parkbeheer</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -35,6 +41,8 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
+        <div id="alertContainer"></div>
     </div>
 
     <footer class="border-top footer text-muted">
